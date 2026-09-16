@@ -1,5 +1,10 @@
 import ResourceList from './ResourceList'
 
+const codespaceName = import.meta.env.VITE_CODESPACE_NAME?.trim()
+const teamsEndpoint = codespaceName
+  ? `https://${codespaceName}-8000.app.github.dev/api/teams/`
+  : 'http://localhost:8000/api/teams/'
+
 export default function Teams() {
-  return <ResourceList component="teams" title="Team pulse" description="Friendly competition, shared momentum, and visible progress." renderItem={(team) => <article className="resource-card accent-card" key={team._id || team.name}><span className="card-kicker">Team</span><h2>{team.name}</h2><p>{team.description || 'Ready to move together.'}</p><strong>{team.totalPoints || 0} points</strong></article>} />
+  return <ResourceList component="teams" endpoint={teamsEndpoint} title="Team pulse" description="Friendly competition, shared momentum, and visible progress." renderItem={(team) => <article className="resource-card accent-card" key={team._id || team.name}><span className="card-kicker">Team</span><h2>{team.name}</h2><p>{team.description || 'Ready to move together.'}</p><strong>{team.totalPoints || 0} points</strong></article>} />
 }

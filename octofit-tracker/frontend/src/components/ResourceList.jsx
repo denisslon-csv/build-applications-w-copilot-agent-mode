@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { fetchCollection } from '../api'
 
-export default function ResourceList({ component, title, description, renderItem }) {
+export default function ResourceList({ component, endpoint, title, description, renderItem }) {
   const [items, setItems] = useState([])
   const [state, setState] = useState({ loading: true, error: '' })
 
   useEffect(() => {
     let active = true
-    fetchCollection(component)
+    fetchCollection(component, endpoint)
       .then((nextItems) => {
         if (active) {
           setItems(nextItems)
